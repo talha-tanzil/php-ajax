@@ -112,7 +112,7 @@
                         $('#table-data').html(data);
                     }
 
-                })
+                });
             });
         });
     </script>
