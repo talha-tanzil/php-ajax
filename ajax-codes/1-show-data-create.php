@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,8 @@
             font-size: 18px;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #555;
             padding: 10px;
             text-align: left;
@@ -87,63 +88,27 @@
         <h1>PHP with Ajax</h1>
 
         <div class="button-box">
-            <button>Load Data</button>
+            <button id ="loadbtn">Load Data</button>
         </div>
-
-        <div class="table-box">
-            <table id="table-data">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                </tr>
-
-                <tr>
-                    <td>1</td>
-                    <td>Yahoo Baba</td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td>Salman Khan</td>
-                </tr>
-
-                <tr>
-                    <td>3</td>
-                    <td>Anil Kapoor</td>
-                </tr>
-
-                <tr>
-                    <td>4</td>
-                    <td>Madhuri Dixit</td>
-                </tr>
-
-                <tr>
-                    <td>5</td>
-                    <td>Aman Kumar</td>
-                </tr>
-
-                <tr>
-                    <td>6</td>
-                    <td>Som Kapoor</td>
-                </tr>
-
-                <tr>
-                    <td>7</td>
-                    <td>Juhi Chawla</td>
-                </tr>
-
-            </table>
-        </div>
+        <table>
+            <tr>
+                <div class="table-box" id="table-data">
+            
+                    <!-- <td id="table-data">
+                    </td> no need of this part-->
+            </tr>
+        </table>
+    </div>
 
     </div>
     <script src="js/jquery-4.0.0.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $('#button-box').on("click", function(e){
+        $(document).ready(function () {
+            $('#loadbtn').on("click", function (e) {
                 $.ajax({
                     url: "2-ajax-load.php",
-                    type: POST, //EKHANE ajax e form er vitoreo method: POST lekhha lage na. sudhu script er vitor type: POST liklei hoi
-                    success: function(data){
+                    type: "POST", //EKHANE ajax e form er vitoreo method: POST lekhha lage na. sudhu script er vitor type: POST liklei hoi
+                    success: function (data) {
                         $('#table-data').html(data);
                     }
 
@@ -153,4 +118,5 @@
     </script>
 
 </body>
+
 </html>
