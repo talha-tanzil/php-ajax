@@ -74,7 +74,7 @@ body {
 }
 /* here for th: this rule comes later and is more specific, text-align: center overrides the earlier text-align: left for the headings. */
 #table-data tr:nth-child(even) {
-    background: #0d7575;
+    background: #96dada;
 }
 
 #table-data tr:nth-child(odd) {
@@ -106,4 +106,12 @@ body {
     position: absolute;
     right: 15px;
     top: 15px;
+}
+.delete-btn {
+    background: red;
+    color: #fff;
+    border: 0;
+    padding: 4px 10px;
+    border-radius: 3px;
+    cursor: pointer; /* er kaj holo ai button ta clickable dekhano*/
 }
