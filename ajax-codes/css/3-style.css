@@ -74,7 +74,7 @@ body {
 }
 /* here for th: this rule comes later and is more specific, text-align: center overrides the earlier text-align: left for the headings. */
 #table-data tr:nth-child(even) {
-    background: #e9eeee;
+    background: #0d7575;
 }
 
 #table-data tr:nth-child(odd) {
@@ -85,4 +85,25 @@ body {
 #table-data th:first-child,
 #table-data td:first-child {
     width: 100px;
+}
+#success-message {
+    background: #DEF1D8;
+    color: green;
+    padding: 10px;
+    margin: 10px;
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+#error-message {
+    background: #EFdcdd;
+    /* color er code capital/small letter e kono difference hoina */
+    color: red;
+    padding: 10px;
+    margin: 10px;
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 15px;
 }
