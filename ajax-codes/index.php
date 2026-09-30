@@ -14,7 +14,7 @@
     <table id="main" border="0" cellspacing="0">
         <tr>
             <td id="header">
-                <h1>Add records with PHP & Ajax</h1>
+                <h1>Add & remove records with PHP, Ajax & JQuery</h1>
             </td>
         </tr>
         <tr>
@@ -54,47 +54,51 @@
                 e.preventDefault();
                 var fname = $("#fname").val();
                 var lname = $("#lname").val();
-                if (fname == '' || lname== ''){
-                $('#error-message').html("All fields are required").slideDown();
-                $('success-message').slideUp();
-            } else {
-                $.ajax({
-                    url: "4-ajax-insert.php",
-                    type: "POST",
-                    data: {
-                        first_name: fname,
-                        last_name: lname
-                    },
-                    success: function (data) {
-                        if (data == 1) {
-                            loadTable();
-                            $('#addForm').trigger('reset');
-                            $('#success-message').html("Data inserted successfully").slideDown();
-                            $('error-message').slideUp();
-                        } else {
-                            alert("Can't save the record");
+                if (fname == '' || lname == '') {
+                    $('#error-message').html("All fields are required").slideDown();
+                    $('#success-message').slideUp();
+                } else {
+                    $.ajax({
+                        url: "4-ajax-insert.php",
+                        type: "POST",
+                        data: {
+                            first_name: fname,
+                            last_name: lname
+                        },
+                        success: function (data) {
+                            if (data == 1) {
+                                loadTable();
+                                $('#addForm').trigger('reset');
+                                $('#success-message').html("Data inserted successfully").slideDown();
+                                $('#error-message').slideUp();
+                            } else {
+                                alert("Can't save the record");
+                            }
                         }
-                    }
-                });
-            }
-
-            $.ajax({
-                url: "4-ajax-insert.php",
-                type: "POST",
-                data: {
-                    first_name: fname,
-                    last_name: lname
-                },
-                success: function (data) {
-                    if (data == 1) {
-                        loadTable();
-                        $('#addForm').trigger('reset');
-                    } else {
-                        alert("Can't save the record");
-                    }
+                    });
                 }
             });
-        });
+
+            // delete-btn functions code
+            $(document).on("click", ".delete-btn", function () {
+                if (confirm("Do you really want to delete this")) {
+                    var studentId = $(this).data('id'); //ekhane id lekha hoise, karon delete-btn er sathe data-id lekha hoisilo
+                    var element = this;
+                    alert(studentId);
+                    $.ajax({
+                        url: "5-ajax-delete.php",
+                        type: "POST",
+                        data: { id: studentId },
+                        success: function (data) {
+                            if (data == 1) {
+                                $(element).closest("tr").fadeOut();
+                            } else {
+                                alert("Can't delete the record");
+                            }
+                        }
+                    });
+                }
+            });
         });
     </script>
 </body>
