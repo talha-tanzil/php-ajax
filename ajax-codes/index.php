@@ -8,13 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/3-style.css">
+    <style>
+       
+    </style>
 </head>
 
 <body>
     <table id="main" border="0" cellspacing="0">
         <tr>
             <td id="header">
-                <h1>Add & remove records with PHP, Ajax & JQuery</h1>
+                <h1>CRUD records with PHP, Ajax & JQuery</h1>
             </td>
         </tr>
         <tr>
@@ -34,9 +37,35 @@
     </table>
     <div id="error-message"></div>
     <div id="success-message"></div>
+    <div id="modal">
+        <div id="modal-form">
+            <h2>Edit Form</h2>
+            <table cellpadding="10px" width="100%">
+                <tr>
+                    <td>First Name</td>
+                    <td><input type="text" id="edit-fname"></td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td><input type="text" id="edit-lname"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" id="edit-submit"></td>
+                </tr>
+            </table>
+            <button id="close-btn">Close</button>
+        </div>
+    </div>
+
+
+    <!-- JS implementation -->
     <script src="js/jquery-4.0.0.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            // $('#modal').css('display', 'block'); //not needed here though
+
             // load Table records
             function loadTable() {
                 $.ajax({
@@ -98,6 +127,26 @@
                         }
                     });
                 }
+            });
+
+            // show modal box
+            $(document).on("click", ".edit-btn", function () {
+                $('#modal').show();
+                var studentId = $(this).data('eid');
+                // alert(studentId);
+
+                $.ajax({
+                    url: "6-load-update-form.php",
+                    type: 'POST',
+                    data: {id: studentId},
+                    success: function(data){
+                        
+                    }
+                })
+            });
+            // hide modal box
+             $('#close-btn').click(function () {
+                $('#modal').css('display', 'none'); // $('#modal').hide(); aita likleo hoi
             });
         });
     </script>

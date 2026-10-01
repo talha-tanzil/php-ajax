@@ -115,3 +115,52 @@ body {
     border-radius: 3px;
     cursor: pointer; /* er kaj holo ai button ta clickable dekhano*/
 }
+
+.edit-btn{
+  background: #3abd71;
+  color: white;
+  border: 0;
+  padding: 4px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#modal{
+  background: rgba(0,0,0,0.7);
+  position: fixed;
+  left: 0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: none;
+}
+#modal-form{
+  background: #fff;
+  width: 40%;
+  position: relative;
+  top: 20%;
+  left: calc(50% - 20%);
+  padding: 15px;
+  border-radius: 4px;
+}
+#modal-form h2{
+  margin: 0 0 15px; /* it means 1st 0 is from top, 2nd 0 is from left-right margin, 3rd one is from right */
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+}
+
+#close-btn{
+  background: red;
+  color: white;
+  width: 60px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 10%;
+  position: absolute;
+  top: -15px;
+  right: -30px;
+  /* top: -15px;
+  right: -15px; aita deya hoise karon aita ke top-right corner e place korate hobe, r etar height 30px er half neya hoise negatively, similarly width er khetreo */
+  cursor: pointer;
+}
