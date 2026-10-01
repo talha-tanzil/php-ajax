@@ -9,7 +9,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/3-style.css">
     <style>
-       
+
     </style>
 </head>
 
@@ -41,18 +41,6 @@
         <div id="modal-form">
             <h2>Edit Form</h2>
             <table cellpadding="10px" width="100%">
-                <tr>
-                    <td>First Name</td>
-                    <td><input type="text" id="edit-fname"></td>
-                </tr>
-                <tr>
-                    <td>Last Name</td>
-                    <td><input type="text" id="edit-lname"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" id="edit-submit"></td>
-                </tr>
             </table>
             <button id="close-btn">Close</button>
         </div>
@@ -91,7 +79,7 @@
                         url: "4-ajax-insert.php",
                         type: "POST",
                         data: {
-                            first_name: fname,
+                            first_name: fname, //fname, lname ta ekhaner var fname, lname theke neya
                             last_name: lname
                         },
                         success: function (data) {
@@ -112,7 +100,7 @@
             $(document).on("click", ".delete-btn", function () {
                 if (confirm("Do you really want to delete this")) {
                     var studentId = $(this).data('id'); //ekhane id lekha hoise, karon delete-btn er sathe data-id lekha hoisilo
-                    var element = this;
+                    var element = this; //here this means .delete-btn
                     alert(studentId);
                     $.ajax({
                         url: "5-ajax-delete.php",
@@ -138,15 +126,34 @@
                 $.ajax({
                     url: "6-load-update-form.php",
                     type: 'POST',
-                    data: {id: studentId},
-                    success: function(data){
-                        
+                    data: { id: studentId },
+                    success: function (data) {
+                        $('#modal-form table').html(data);
                     }
-                })
+                });
             });
             // hide modal box
-             $('#close-btn').click(function () {
+            $('#close-btn').click(function () {
                 $('#modal').css('display', 'none'); // $('#modal').hide(); aita likleo hoi
+            });
+            //save update form
+            $(document).on("click", ".edit-submit", function () {
+                var stuId = $("#edit-id").val();
+                var fname = $("#edit-lname").val();
+                var lname = $("#edit-submit").val();
+                $.ajax ({
+                    url: "7-ajax-update-form.php",
+                    type: "POST",
+                    data: {
+                        id: stuId,
+                        first_name: fname,
+                        last_name: lname //stuId, fname, lname ta ekhaner var fname, lname theke neya
+                },
+                    success: function(data){
+                        $('#modal').hide();
+                    }
+                });
+
             });
         });
     </script>
