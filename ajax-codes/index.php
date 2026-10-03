@@ -137,20 +137,25 @@
                 $('#modal').css('display', 'none'); // $('#modal').hide(); aita likleo hoi
             });
             //save update form
-            $(document).on("click", ".edit-submit", function () {
+            $(document).on("click", "#edit-submit", function () {
                 var stuId = $("#edit-id").val();
-                var fname = $("#edit-lname").val();
-                var lname = $("#edit-submit").val();
-                $.ajax ({
+                var fname = $("#edit-fname").val();
+                var lname = $("#edit-lname").val();
+                $.ajax({
                     url: "7-ajax-update-form.php",
                     type: "POST",
                     data: {
                         id: stuId,
                         first_name: fname,
                         last_name: lname //stuId, fname, lname ta ekhaner var fname, lname theke neya
-                },
-                    success: function(data){
-                        $('#modal').hide();
+                    },
+                    success: function (data) {
+                        if (data == 1) {
+                            $('#modal').hide(); //hide kora hoise karon update successful hoile modalbox jeno hide hoi
+                            loadTable();
+                        } //else {
+                        //     echo "<h2>Update isn't working properly</h2>"
+                        // }
                     }
                 });
 
