@@ -21,8 +21,30 @@ body {
 }
 
 #header h1 {
-    font-size: 36px;
+    /* font-size: 22px; */
     margin: 15px 0;
+    float: left;
+}
+#search-bar{
+  padding: 10px 20px 0;
+  float: right;
+}
+#search-bar label{
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+}
+#search-bar input{
+  width: 250px;
+  height: 25px;
+  font-size: 18px;
+  letter-spacing: 0.8px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid #000;
+}
+#search-bar input:focus{
+  outline: 0;
 }
 
 /* Form section */

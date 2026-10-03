@@ -17,7 +17,11 @@
     <table id="main" border="0" cellspacing="0">
         <tr>
             <td id="header">
-                <h1>CRUD records with PHP, Ajax & JQuery</h1>
+                <h1>PHP & Ajax CRUD</h1>
+                <div id="search-bar">
+                    <label for="">Search :</label>
+                    <input type="text" id="search" autocomplete="off">
+                </div>
             </td>
         </tr>
         <tr>
@@ -141,24 +145,45 @@
                 var stuId = $("#edit-id").val();
                 var fname = $("#edit-fname").val();
                 var lname = $("#edit-lname").val();
+                if (fname == '' || lname == '') {
+                    $('#error-message').html("All fields are required").slideDown();
+                    $('#success-message').slideUp();
+                } else {
+                    $.ajax({
+                        url: "7-ajax-update-form.php",
+                        type: "POST",
+                        data: {
+                            id: stuId,
+                            first_name: fname,
+                            last_name: lname //stuId, fname, lname ta ekhaner var fname, lname theke neya & id, first_name, last_name era eder key
+                        },
+                        success: function (data) {
+                            if (data == 1) {
+                                $('#modal').hide(); //hide kora hoise karon update successful hoile modalbox jeno hide hoi
+                                loadTable();
+                            } //else {
+                            //  echo "<h2>Update isn't working properly</h2>";
+                            //   }
+                        }
+                    });
+                }
+
+            });
+
+            //Live search
+            $('#search').on('keyup', function () {
+                var search_term = $(this).val(); //ekhane this diye #search ke target kora hoise, keyup holo er event, on ekti method, val()-o ekti method
+
                 $.ajax({
-                    url: "7-ajax-update-form.php",
+                    url: "8-ajax-live-search.php",
                     type: "POST",
                     data: {
-                        id: stuId,
-                        first_name: fname,
-                        last_name: lname //stuId, fname, lname ta ekhaner var fname, lname theke neya
+                        search: search_term
                     },
                     success: function (data) {
-                        if (data == 1) {
-                            $('#modal').hide(); //hide kora hoise karon update successful hoile modalbox jeno hide hoi
-                            loadTable();
-                        } //else {
-                        //     echo "<h2>Update isn't working properly</h2>"
-                        // }
+                        $('#table-data').html(data);
                     }
                 });
-
             });
         });
     </script>
