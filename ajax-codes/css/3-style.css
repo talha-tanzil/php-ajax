@@ -12,22 +12,26 @@ body {
     margin: 0 auto;
     background: white;
 }
-
+/* #main {
+    display: flex;
+    justify-content: space-around;
+} */
 /* Header */
 #header {
     background: #ffda91;
-    text-align: center;
     padding: 1px;
+    display: flex;
+    justify-content: space-around;
 }
 
 #header h1 {
-    /* font-size: 22px; */
+    font-size: 32px;
     margin: 15px 0;
-    float: left;
+    /* float: left; */
 }
 #search-bar{
-  padding: 10px 20px 0;
-  float: right;
+  padding: 10px 50px 0;
+  /* float: right; */
 }
 #search-bar label{
   font-size: 16px;

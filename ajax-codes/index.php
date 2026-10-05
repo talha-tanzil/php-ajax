@@ -9,7 +9,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/3-style.css">
     <style>
-
+        #header {
+            display: flex;
+            justify-content: space-around;
+        }
+        #search-bar {
+            padding-top: 20px;
+        }
     </style>
 </head>
 
