@@ -86,6 +86,7 @@
     <script src="js/jquery-4.0.0.min.js"></script>
     <script>
         $(document).ready(function () {
+            var search_term = ''; //for live search pagination
 
             // $('#modal').css('display', 'block'); //not needed here though
 
@@ -102,15 +103,35 @@
                     }
                 });
             }
-            loadTable(); //load Table records on page load
+            loadTable(1); //load Table records on page load
+
+            // search Table records
+            function searchTable(search_term, page_id) {
+                $.ajax({
+                    url: "8-ajax-live-search.php",
+                    type: "POST",
+                    data: {
+                        search: search_term,
+                        page_no: page_id
+                    },
+                    success: function (data) {
+                        $('#table-data').html(data);
+                    }
+                });
+            }
 
             //Pagination Code
             $(document).on("click", "#pagination a", function (e) {
                 e.preventDefault();
+
                 var page_id = $(this).attr("id");
 
-                loadTable(page_id);
-            })
+                if (search_term == '') {
+                    loadTable(page_id);
+                } else {
+                    searchTable(search_term, page_id);
+                }
+            });
 
             // insert new records
             $('#save-button').on("click", function (e) {
@@ -130,7 +151,7 @@
                         },
                         success: function (data) {
                             if (data == 1) {
-                                loadTable();
+                                loadTable(1);
                                 $('#addForm').trigger('reset');
                                 $('#success-message').html("Data inserted successfully").slideDown();
                                 $('#error-message').slideUp();
@@ -202,7 +223,7 @@
                         success: function (data) {
                             if (data == 1) {
                                 $('#modal').hide(); //hide kora hoise karon update successful hoile modalbox jeno hide hoi
-                                loadTable();
+                                loadTable(1);
                             } //else {
                             //  echo "<h2>Update isn't working properly</h2>";
                             //   }
@@ -213,19 +234,22 @@
             });
 
             //Live search
-            $('#search').on('keyup', function () {
-                var search_term = $(this).val(); //ekhane this diye #search ke target kora hoise, keyup holo er event, on ekti method, val()-o ekti method
+            // $('#search').on('keyup', function () {
+            // var search_term = $(this).val();
+            //ekhane this diye #search ke target kora hoise, keyup holo er event, on ekti method, val()-o ekti method
 
-                $.ajax({
-                    url: "8-ajax-live-search.php",
-                    type: "POST",
-                    data: {
-                        search: search_term
-                    },
-                    success: function (data) {
-                        $('#table-data').html(data);
-                    }
-                });
+
+            // Live search
+            $('#search').on('keyup', function () {
+
+                search_term = $(this).val();
+
+                if (search_term == '') {
+                    loadTable(1);
+                } else {
+                    searchTable(search_term, 1);
+                }
+
             });
         });
     </script>
