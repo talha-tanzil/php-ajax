@@ -1,7 +1,16 @@
 <?php
 include 'db.php';
-// $search_value = mysqli_escape_string($conn, $_POST['search']);
-$search_value = $_POST['search']; // hoileo hoi
+$search_value = mysqli_escape_string($conn, $_POST['search']);
+// $search_value = $_POST['search']; // hoileo hoi
+// $limit = 3;
+
+// if(isset($_POST['page_no'])){
+//     $page = $_POST['page_no'];
+// } else {
+//     $page = 1;
+// }
+
+// $offset = ($page - 1) * $limit;
 
 $sql = "SELECT * FROM student WHERE first_name LIKE '%{$search_value}%' OR last_name LIKE '%{$search_value}%'";
 $result = mysqli_query($conn, $sql);

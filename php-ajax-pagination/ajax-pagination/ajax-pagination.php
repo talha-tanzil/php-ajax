@@ -13,7 +13,7 @@
 
   $offset = ($page - 1) * $limit_per_page;
 
-  $sql = "SELECT * FROM students LIMIT {$offset},{$limit_per_page}";
+  $sql = "SELECT * FROM student LIMIT {$offset},{$limit_per_page}";
   $result = mysqli_query($conn,$sql) or die("Query Unsuccessful.");
   $output= "";
   if(mysqli_num_rows($result) > 0){
@@ -27,7 +27,7 @@
       }
     $output .= "</table>";
 
-    $sql_total = "SELECT * FROM students";
+    $sql_total = "SELECT * FROM student";
     $records = mysqli_query($conn,$sql_total) or die("Query Unsuccessful.");
     $total_record = mysqli_num_rows($records);
     $total_pages = ceil($total_record/$limit_per_page);

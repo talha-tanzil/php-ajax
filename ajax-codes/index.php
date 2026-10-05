@@ -13,8 +13,33 @@
             display: flex;
             justify-content: space-around;
         }
+
         #search-bar {
             padding-top: 20px;
+        }
+
+
+        #pagination {
+            text-align: center;
+            padding: 10px;
+        }
+
+        #pagination a {
+            background: #2980b9;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border-radius: 3px;
+        }
+
+        #pagination a:hover {
+            background: #555;
+        }
+
+        #pagination a.active {
+            background: #27ae60;
         }
     </style>
 </head>
@@ -23,7 +48,7 @@
     <table id="main" border="0" cellspacing="0">
         <tr>
             <td id="header">
-                <h1>PHP & Ajax CRUD</h1>
+                <h1>PHP, Ajax & jQuery CRUD</h1>
                 <div id="search-bar">
                     <label for="">Search :</label>
                     <input type="text" id="search" autocomplete="off">
@@ -65,16 +90,27 @@
             // $('#modal').css('display', 'block'); //not needed here though
 
             // load Table records
-            function loadTable() {
+            function loadTable(page) {
                 $.ajax({
                     url: "2-ajax-load.php",
                     type: "POST", //EKHANE ajax e form er vitoreo method: POST lekhha lage na. sudhu script er vitor type: POST liklei hoi
+                    data: {
+                        page_no: page
+                    },
                     success: function (data) {
                         $('#table-data').html(data);
                     }
                 });
             }
             loadTable(); //load Table records on page load
+
+            //Pagination Code
+            $(document).on("click", "#pagination a", function (e) {
+                e.preventDefault();
+                var page_id = $(this).attr("id");
+
+                loadTable(page_id);
+            })
 
             // insert new records
             $('#save-button').on("click", function (e) {

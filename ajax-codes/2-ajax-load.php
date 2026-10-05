@@ -1,7 +1,19 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "test") or die("connection failed");
-$sql = "SELECT * FROM student";
-$result = mysqli_query($conn, $sql);
+
+$limit = 5;
+
+if (isset($_POST['page_no'])) {
+    $page = $_POST['page_no'];
+} else {
+    $page = 1;
+}
+// or $page = $_POST['page'] ?? 1; this is null coalescing operator which is similar to ternary operator. ternary operator is like this: condition ? value_if_true : value_if_false; for example: $page = isset($_POST['page']) ? $_POST['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+// Get records for current page
+$sql = "SELECT * FROM student LIMIT {$offset},{$limit}";
+$result = mysqli_query($conn, $sql) or die("Load Query Unsuccessful.");
 $output = "";
 if (mysqli_num_rows($result) > 0) {
     $output = "<table border='1' width='100%' cellspacing='0' cellpadding='10px'>
@@ -17,6 +29,24 @@ if (mysqli_num_rows($result) > 0) {
         $output .= "<tr><td>{$row['id']}</td><td>{$row['first_name']} {$row['last_name']}</td><td style='text-align:center'><button class='edit-btn' data-eid='{$row['id']}'> Edit </button></td><td><button class='delete-btn' data-id='{$row['id']}'> Delete </button></td> </tr>";
     } //<td align='center'> likleo hoi
     $output .= "</table>";
+
+    // Get total number of records
+    $sql_total = "SELECT * FROM student";
+    $records = mysqli_query($conn,$sql_total) or die("Query Unsuccessful.");
+    $total_record = mysqli_num_rows($records);
+    $total_pages = ceil($total_record/$limit);
+
+    $output .='<div id="pagination">';
+
+    for($i=1; $i <= $total_pages; $i++){
+      if($i == $page){
+        $class_name = "active";
+      }else{
+        $class_name = "";
+      }
+      $output .= "<a class='{$class_name}' id='{$i}' href=''>{$i}</a>";
+    }
+    $output .='</div>';
     mysqli_close($conn);
     echo $output;
 } else {

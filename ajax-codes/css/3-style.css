@@ -1,7 +1,11 @@
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #b0bec5;
+}
+body {
+    background: red;
 }
 
 /* Main container */
@@ -190,3 +194,46 @@ body {
   right: -15px; aita deya hoise karon aita ke top-right corner e place korate hobe, r etar height 30px er half neya hoise negatively, similarly width er khetreo */
   cursor: pointer;
 }
+
+#pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#pagination a {
+    display: inline-block;
+    text-decoration: none;
+    background: #333;
+    color: white;
+    padding: 8px 12px;
+    margin: 0 3px;
+    border-radius: 3px;
+}
+
+#pagination a:hover {
+    background: #555;
+}
+
+#pagination a.active {
+    background: #66a9f7;
+}
+
+/* #pagination{
+  text-align: center;
+  padding: 10px;
+}
+#pagination a{
+  background: #2980b9;
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  padding:5px 10px;
+  margin-right: 5px;
+  border-radius: 3px;
+}
+#pagination a:hover {
+    background: #555;
+}
+#pagination a.active{
+  background: #27ae60;
+} */
